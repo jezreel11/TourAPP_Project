@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tournament Manager</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Tournaments</h1>
+
+    <form action="/add" method="post">
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="text" name="location" placeholder="Location" required>
+        <input type="date" name="date" required>
+        <button type="submit">Add Tournament</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for t in tournaments %}
+            <tr>
+                <td>{{ t.id }}</td>
+                <td>{{ t.name }}</td>
+                <td>{{ t.location }}</td>
+                <td>{{ t.date }}</td>
+                <td><a href="/delete/{{ t.id }}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
